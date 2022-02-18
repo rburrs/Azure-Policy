@@ -1,0 +1,48 @@
+name: manage-azure-policy-ea8a31b4
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'policies/Cognitive_Services_accounts_should_disable_public_network_access_0725b4dd-7e76-479c-a735-68e7ee23d5ca/**'
+#      - 'policies/Configure_Data_Factories_to_disable_public_network_access_08b1442b-7789-4130-8506-4f99a97226a7/**'
+#      - 'policies/Configure_Azure_Cache_for_Redis_to_disable_public_network_access_30b3dfa5-a70d-4c8e-bed6-0083858f663d/**'
+#      - 'policies/Configure_App_Services_to_disable_public_network_access_81dff7c0-4020-4b58-955d-c076a2136b56/**'
+#      - 'policies/Configure_API_Management_services_to_disable_public_network_access_7ca8c8ac-3a6e-493d-99ba-c5fa35347ff2/**'
+#      - 'policies/Configure_Azure_Log_Analytics_workspaces_to_disable_public_network_access_for_log_ingestion_and_querying_d3ba9c42-9dd5-441a-957c-274031c750c0/**'
+#      - 'policies/Configure_Container_registries_to_disable_public_network_access_a3701552-92ea-433e-9d17-33b7f1208fc9/**'
+#      - 'policies/Public_network_access_should_be_disabled_on_storage_accounts_1be60412-1a36-4c6d-993a-d2796bc940f3/**'
+#      - 'policies/Public_network_access_should_be_disabled_for_MariaDB_servers_fdccbe47-f3e3-4213-ad5d-ea459b2fa077/**'
+#      - .github/workflows/manage-azure-policy-ea8a31b4.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_ea8a31b4}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          policies/Cognitive_Services_accounts_should_disable_public_network_access_0725b4dd-7e76-479c-a735-68e7ee23d5ca/**
+          policies/Configure_Data_Factories_to_disable_public_network_access_08b1442b-7789-4130-8506-4f99a97226a7/**
+          policies/Configure_Azure_Cache_for_Redis_to_disable_public_network_access_30b3dfa5-a70d-4c8e-bed6-0083858f663d/**
+          policies/Configure_App_Services_to_disable_public_network_access_81dff7c0-4020-4b58-955d-c076a2136b56/**
+          policies/Configure_API_Management_services_to_disable_public_network_access_7ca8c8ac-3a6e-493d-99ba-c5fa35347ff2/**
+          policies/Configure_Azure_Log_Analytics_workspaces_to_disable_public_network_access_for_log_ingestion_and_querying_d3ba9c42-9dd5-441a-957c-274031c750c0/**
+          policies/Configure_Container_registries_to_disable_public_network_access_a3701552-92ea-433e-9d17-33b7f1208fc9/**
+          policies/Public_network_access_should_be_disabled_on_storage_accounts_1be60412-1a36-4c6d-993a-d2796bc940f3/**
+          policies/Public_network_access_should_be_disabled_for_MariaDB_servers_fdccbe47-f3e3-4213-ad5d-ea459b2fa077/**

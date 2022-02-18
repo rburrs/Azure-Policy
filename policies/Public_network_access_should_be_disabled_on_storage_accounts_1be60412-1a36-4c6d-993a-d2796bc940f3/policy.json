@@ -1,0 +1,36 @@
+{
+ "properties": {
+  "displayName": "Public network access should be disabled on storage accounts",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "Disabling the public network access property improves security by ensuring your Azure Storage Account can only be accessed from a private endpoint.",
+  "metadata": {
+   "category": "Storage",
+   "createdBy": "f261c26e-4a26-4b52-9e06-986384d31713",
+   "createdOn": "2021-12-15T16:36:57.151039Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Storage/storageAccounts"
+     },
+     {
+      "field": "Microsoft.Storage/storageAccounts/networkAcls.defaultAction",
+      "notEquals": "Deny"
+     }
+    ]
+   },
+   "then": {
+    "effect": "Deny"
+   }
+  }
+ },
+ "id": "/subscriptions/43261dd9-374f-4b21-b84a-9e59e92771a7/providers/Microsoft.Authorization/policyDefinitions/1be60412-1a36-4c6d-993a-d2796bc940f3",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "1be60412-1a36-4c6d-993a-d2796bc940f3"
+}
